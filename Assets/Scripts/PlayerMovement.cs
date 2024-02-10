@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     public GameObject player;
-    public CharacterController characterController;
+    CharacterController characterController;
     public Transform cam;
 
     Animator animator;
@@ -32,12 +33,16 @@ public class PlayerMovement : MonoBehaviour
         playerStats = GetComponent<PlayerStats>();
         speedSpell = GetComponent<SpeedSpell>();
         animator = GetComponent<Animator>();
+        characterController = GetComponent<CharacterController>();
+        //Cursor.visible = false;
     }
 
     void Update()
     {
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -1f;
@@ -57,12 +62,24 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             characterController.Move(moveDirection.normalized * movementSpeed * Time.deltaTime);
             //Debug.Log(characterController.velocity.magnitude);
-            animator.SetBool("Run", true);
+            
+
+            if(movementSpeed > 5f) {
+                animator.SetBool("Walk", false);
+                animator.SetBool("Run", true);
+            }
+
+            else
+            {
+                animator.SetBool("Run", false);
+                animator.SetBool("Walk", true);
+            }
         }
 
         else
         {
             animator.SetBool("Run", false);
+            animator.SetBool("Walk", false);
         }
         
 
@@ -93,5 +110,6 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
+
 
 }

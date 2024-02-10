@@ -6,7 +6,9 @@ public class FirePlaceSpell : MonoBehaviour
 {
     public GameObject player;
     public GameObject fireplace;
+    public GameObject fpPositioning;
     GameObject logs;
+    GameObject positioninglogs;
     public bool isFirePlaceSpell = false;
     bool isPositioning = false;
 
@@ -27,7 +29,7 @@ public class FirePlaceSpell : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red);
-                logs = Instantiate(fireplace, hit.point, transform.rotation);
+                positioninglogs = Instantiate(fpPositioning, hit.point, transform.rotation);
                 
             }
 
@@ -43,19 +45,16 @@ public class FirePlaceSpell : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red);
-                logs.transform.position = hit.point;
+                positioninglogs.transform.position = hit.point;
 
-            }            
-
+            }
+            
         }
-
-
-
-
 
 
         if (Input.GetMouseButtonDown(0) && isFirePlaceSpell)
         {
+            Destroy(positioninglogs);
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -63,7 +62,8 @@ public class FirePlaceSpell : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red);
-                logs = Instantiate(fireplace, hit.point, transform.rotation);
+                Instantiate(fireplace, hit.point, transform.rotation);
+                isPositioning = false;
                 isFirePlaceSpell = false;
 
             }

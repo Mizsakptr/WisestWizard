@@ -40,6 +40,7 @@ public class SpellTabController : MonoBehaviour
     {
         selectedTab = 2;
         showTab1 = false;
+        showTab3 = false;
         basicSpellButton.gameObject.SetActive(false);
         speedSpellButton.gameObject.SetActive(false);
         healthSpellButton.gameObject.SetActive(false);

@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
     public int playerBaseMana = 10;
     public int playerXP = 0;
     public int playerLevel = 1;
-    public float playerBaseSpeed = 10f; //***** csak debug érték
+    public float playerBaseSpeed = 1f;
     public float playerBaseHealthRegen = 1f;
     public float playerBaseManaRegen = 1f;
 

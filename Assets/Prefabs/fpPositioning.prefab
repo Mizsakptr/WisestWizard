@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2158631971453686416}
   - component: {fileID: 6250009612109046719}
   - component: {fileID: 7010757450989183146}
-  m_Layer: 6
-  m_Name: Fireplace
+  m_Layer: 2
+  m_Name: fpPositioning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
