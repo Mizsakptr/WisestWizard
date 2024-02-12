@@ -29,7 +29,7 @@ public class FirePlaceSpell : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red);
-                positioninglogs = Instantiate(fpPositioning, hit.point, transform.rotation);
+                positioninglogs = Instantiate(fpPositioning, hit.point, Quaternion.identity);
                 
             }
 
@@ -62,7 +62,7 @@ public class FirePlaceSpell : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red);
-                Instantiate(fireplace, hit.point, transform.rotation);
+                Instantiate(fireplace, hit.point, Quaternion.identity);
                 isPositioning = false;
                 isFirePlaceSpell = false;
 
