@@ -11,7 +11,7 @@ public class DungeonBehaviour : MonoBehaviour
     public int dungeonSize;
 
     float timer = 0f;
-    float waitTime = 3f;
+    float waitTime = 0.1f;
 
 
 
@@ -33,9 +33,9 @@ public class DungeonBehaviour : MonoBehaviour
         isPathWalkable = startobject.GetComponent<CheckPath>();
         DungeonBrain();
 
-        player.transform.position = new Vector3(0f, 0.2f, 0f);
-        startobject.transform.position = new Vector3(0f, 0f, 0f);
-        endobject.transform.position = new Vector3(32f, 1f, 40f);
+        player.transform.position = new Vector3(12f * MathF.Floor(hossz / 2), 0.5f, 12f * MathF.Floor(szel / 2));
+        startobject.transform.position = new Vector3(12f * MathF.Floor(hossz/2), 0f, 12f * MathF.Floor(szel/2));
+        
 
 
     }    
@@ -43,7 +43,7 @@ public class DungeonBehaviour : MonoBehaviour
 
     bool rnd()
     {
-        if (UnityEngine.Random.value > 0.5f)
+        if (UnityEngine.Random.value > 0.2f) //0.4 jó lesz
         {
             return true;
         }
@@ -55,7 +55,7 @@ public class DungeonBehaviour : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(isPathWalkable.isWalkable);
+        //Debug.Log(isPathWalkable.isWalkable);
 
         if (!isPathWalkable.isWalkable)
         {
@@ -63,12 +63,10 @@ public class DungeonBehaviour : MonoBehaviour
             timer += Time.deltaTime;
             if (timer >= waitTime)
             {
-
-                        Debug.Log("asd");
+                  
                 for (int i = 0; i < transform.childCount; i++)
                 {
                     Destroy(transform.GetChild(i).gameObject);
-                    Debug.Log(transform.GetChild(i).name);
                 }            
                                 
                 DungeonBrain();
@@ -89,7 +87,7 @@ public class DungeonBehaviour : MonoBehaviour
             for (int j = 0; j < szel; j++)
             {
 
-                GameObject room = Instantiate(roomprefab, new Vector3(i * 8f, 0f, j * 8f), transform.rotation);
+                GameObject room = Instantiate(roomprefab, new Vector3(i * 12f, 0f, j * 12f), transform.rotation);
                 room.transform.SetParent(transform);
                 for (int k = 0; k < 4; k++)
                 {
@@ -100,6 +98,8 @@ public class DungeonBehaviour : MonoBehaviour
 
             }
         }
+
+        endobject.transform.position = new Vector3(12f * (hossz-1), 1f, 12f * (szel-1));
 
 
         // Terület Bezárása

@@ -53,7 +53,14 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
         
         movementSpeed = playerStats.playerBaseSpeed * speedSpell.speedModifyer;
-        
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            movementSpeed = 6f;
+            //Debug.Log(movementSpeed);
+
+        }
+
         if (direction.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
@@ -64,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log(characterController.velocity.magnitude);
             
 
-            if(movementSpeed > 5f) {
+            if(movementSpeed >= 5f) {
                 animator.SetBool("Walk", false);
                 animator.SetBool("Run", true);
             }
@@ -90,6 +97,8 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             
         }
+
+
 
 
         if (!isGrounded)
